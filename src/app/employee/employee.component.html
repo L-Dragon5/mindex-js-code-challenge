@@ -1,7 +1,7 @@
 <mat-card class="employee">
   <mat-card-header>
     <mat-card-title>{{employee.lastName}}, {{employee.firstName}}</mat-card-title>
-    <mat-card-subtitle>{{employee.id}} - {{employeesThatReport?.length || '0'}}</mat-card-subtitle>
+    <mat-card-subtitle>{{employee.id}} - Direct Reports: {{employeesThatReport?.length || '0'}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <dl>
@@ -9,4 +9,17 @@
       <dd>{{employee.position}}</dd>
     </dl>
   </mat-card-content>
+  <mat-card-footer *ngIf="employeesThatReport?.length > 0">
+    <div *ngFor="let emp of employeesThatReport">
+      <div>{{emp.lastName}}, {{emp.firstName}}</div>
+        <div>
+        <button mat-icon-button title="Edit employee's compensation" (click)="onEditClick(emp)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button title="Delete report" (click)="onDeleteClick(emp)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card-footer>
 </mat-card>

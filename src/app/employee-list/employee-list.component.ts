@@ -25,6 +25,16 @@ export class EmployeeListComponent implements OnInit {
       ).subscribe();
   }
 
+  // Calls service to save edits to employee.
+  onEdit (emp) : void {
+    this.employeeService.save(emp);
+  }
+
+  // Calls service to remove employee from db.
+  onDelete (emp) : void {
+    this.employeeService.remove(emp);
+  }
+
   private handleError(e: Error | any): string {
     console.error(e);
     return this.errorMessage = e.message || 'Unable to retrieve employees';
