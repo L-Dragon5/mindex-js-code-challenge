@@ -1,7 +1,7 @@
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {from, Observable, throwError} from 'rxjs';
-import {catchError, flatMap} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 import {Employee} from './employee';
 
@@ -12,12 +12,9 @@ export class EmployeeService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<Employee> {
+  getAll(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.url)
-      .pipe(
-        flatMap(emps => from(emps)),
-        catchError(this.handleError)
-      );
+      .pipe(catchError(this.handleError));
   }
 
   get(id: number): Observable<Employee> {

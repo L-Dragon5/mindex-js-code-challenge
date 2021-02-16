@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {catchError, map, reduce} from 'rxjs/operators';
+import { UnsubscriptionError } from 'rxjs';
 
 import {Employee} from '../employee';
 import {EmployeeService} from '../employee.service';
@@ -17,22 +17,34 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.getAll()
-      .pipe(
-        reduce((emps, e: Employee) => emps.concat(e), []),
-        map(emps => this.employees = emps),
-        catchError(this.handleError.bind(this))
-      ).subscribe();
+    this.employeeService.getAll().subscribe((emps) => this.employees = emps);
   }
 
   // Calls service to save edits to employee.
   onEdit (emp) : void {
-    this.employeeService.save(emp);
+    this.employeeService.save(emp).subscribe();
   }
 
   // Calls service to remove employee from db.
   onDelete (emp) : void {
-    this.employeeService.remove(emp);
+    // Tell DB service to remove employee.
+    this.employeeService.remove(emp).subscribe();
+    
+    // Client-side, filter out removed employee from direct reports and overall list.
+    this.employees = this.employees
+      .map((e) => {
+        if (e.directReports !== undefined) {
+          e.directReports = e.directReports?.filter((id) => id !== emp.id);
+
+          // If directReports is empty, remove property.
+          if (e.directReports?.length < 1) {
+            delete(e.directReports);
+          }
+        }
+
+        return e;
+      })
+      .filter((e) => e.id !== emp.id);
   }
 
   private handleError(e: Error | any): string {

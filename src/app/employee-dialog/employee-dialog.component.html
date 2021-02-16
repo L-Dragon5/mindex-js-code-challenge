@@ -1,0 +1,39 @@
+<div *ngIf="employee">
+    <div *ngIf="dialogType == 'edit'">
+        <h1 mat-dialog-title>Update Compensation</h1>
+        <div mat-dialog-content>
+            <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input matInput disabled value={{employee.firstName}}>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input matInput disabled value={{employee.lastName}}>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Position</mat-label>
+                <input matInput disabled value={{employee.position}}>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Compensation</mat-label>
+                <input matInput type="number" required [(ngModel)]="employee.compensation">
+            </mat-form-field>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="employee">Save</button>
+            <button mat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+    </div>
+
+    <div *ngIf="dialogType == 'delete'">
+        <h1 mat-dialog-title>Delete Direct Report</h1>
+        <div mat-dialog-content>
+            <p>Permanently delete direct report {{employee.firstName}} {{employee.lastName}}?</p>
+            <p>This action cannot be undone.</p>
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="employee">Confirm</button>
+            <button mat-button (click)="onCancelClick()">Cancel</button>
+        </div>
+    </div>
+</div>

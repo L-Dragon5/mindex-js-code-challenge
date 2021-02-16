@@ -1,7 +1,9 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 
 import {Employee} from '../employee';
 import {EmployeeService} from '../employee.service';
+import {EmployeeDialogComponent} from '../employee-dialog/employee-dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -14,7 +16,7 @@ export class EmployeeComponent {
   @Output() delete: EventEmitter<any> = new EventEmitter();
   employeesThatReport: Employee[] = [];
 
-  constructor(private employeeService: EmployeeService) {
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
   }
 
   // On component intialization
@@ -29,11 +31,35 @@ export class EmployeeComponent {
 
   // When edit button is pressed, emit edit to Employee List.
   onEditClick (emp) : void {
-    this.edit.emit(emp);
+    const dialogRef = this.dialog.open(EmployeeDialogComponent, {
+      width: '250px',
+      data: {
+        employee: emp,
+        type: 'edit',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data !== undefined) {
+        this.edit.emit(data);
+      }
+    });
   }
 
   // When delete button is pressed, emit delete to Employee List.
   onDeleteClick (emp) : void {
-    this.delete.emit(emp);
+    const dialogRef = this.dialog.open(EmployeeDialogComponent, {
+      width: '250px',
+      data: {
+        employee: emp,
+        type: 'delete',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data !== undefined) {
+        this.delete.emit(emp);
+      }
+    });
   }
 }

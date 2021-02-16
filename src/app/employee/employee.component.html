@@ -12,7 +12,7 @@
   <mat-card-footer *ngIf="employeesThatReport?.length > 0">
     <div *ngFor="let emp of employeesThatReport">
       <div>{{emp.lastName}}, {{emp.firstName}}</div>
-        <div>
+      <div>
         <button mat-icon-button title="Edit employee's compensation" (click)="onEditClick(emp)">
           <mat-icon>edit</mat-icon>
         </button>
@@ -23,3 +23,4 @@
     </div>
   </mat-card-footer>
 </mat-card>
+<app-employee-dialog></app-employee-dialog>
