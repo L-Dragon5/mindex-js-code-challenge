@@ -1,0 +1,47 @@
+.employee-header .employee-title {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #1976d2
+}
+
+.employee-header .employee-subtitle {
+    margin: 0 0 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #aaa;
+}
+
+.mat-card-footer {
+    padding: 16px;
+}
+
+.mat-card-footer span {
+    color: #aaa;
+    font-size: 0.75rem;
+}
+
+.employee table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.employee table thead tr th {
+    background-color: #2196f3;
+    color: #fff;
+    padding: 8px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.employee table tbody tr:nth-of-type(even) {
+    background-color: #eee;
+}
+
+.employee table tbody tr td:nth-of-type(1) {
+    padding: 2px 8px;
+}
+
+.employee table tbody tr td:nth-of-type(2) {
+    float: right;
+}

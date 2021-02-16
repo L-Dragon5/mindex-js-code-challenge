@@ -16,6 +16,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {EmployeeDialogComponent} from './employee-dialog/employee-dialog.component';
 
 @NgModule({
@@ -43,9 +44,11 @@ import {EmployeeDialogComponent} from './employee-dialog/employee-dialog.compone
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [
+    { provide: EmployeeDialogComponent, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: {} },
     EmployeeService

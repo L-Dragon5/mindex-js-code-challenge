@@ -1,0 +1,7 @@
+.employee-list {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-auto-flow: dense;
+    padding: 8px;
+}

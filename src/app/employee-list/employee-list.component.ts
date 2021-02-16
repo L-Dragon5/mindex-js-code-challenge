@@ -17,7 +17,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.employeeService.getAll().subscribe((emps) => this.employees = emps);
+    this.employeeService
+      .getAll()
+      .subscribe((emps) => this.employees = emps.sort((a, b) => a.firstName > b.firstName ? 1 : -1));
   }
 
   // Calls service to save edits to employee.

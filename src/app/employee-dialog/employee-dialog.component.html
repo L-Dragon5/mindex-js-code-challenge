@@ -16,24 +16,24 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Compensation</mat-label>
-                <input matInput type="number" required [(ngModel)]="employee.compensation">
+                <input matInput type="number" required placeholder="$ ..." [(ngModel)]="employee.compensation">
             </mat-form-field>
         </div>
         <div mat-dialog-actions>
-            <button mat-button [mat-dialog-close]="employee">Save</button>
-            <button mat-button (click)="onCancelClick()">Cancel</button>
+            <button mat-flat-button color="primary" [mat-dialog-close]="employee">Save</button>
+            <button mat-stroked-button (click)="onCancelClick()">Cancel</button>
         </div>
     </div>
 
     <div *ngIf="dialogType == 'delete'">
         <h1 mat-dialog-title>Delete Direct Report</h1>
         <div mat-dialog-content>
-            <p>Permanently delete direct report {{employee.firstName}} {{employee.lastName}}?</p>
-            <p>This action cannot be undone.</p>
+            <p>Permanently delete direct report "{{employee.firstName}} {{employee.lastName}}"?</p>
+            <p><strong>This action cannot be undone.</strong></p>
         </div>
         <div mat-dialog-actions>
-            <button mat-button [mat-dialog-close]="employee">Confirm</button>
-            <button mat-button (click)="onCancelClick()">Cancel</button>
+            <button mat-flat-button color="warn" [mat-dialog-close]="employee">Confirm</button>
+            <button mat-stroked-button (click)="onCancelClick()">Cancel</button>
         </div>
     </div>
 </div>

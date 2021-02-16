@@ -1,0 +1,14 @@
+.mat-dialog-title {
+    color: #1976d2;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    margin: 0 0 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+p {
+    font-family: sans-serif;
+}

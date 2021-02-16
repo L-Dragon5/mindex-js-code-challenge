@@ -7,18 +7,6 @@ import {EmployeeComponent} from './employee.component';
 class CardComponent {
 }
 
-@Component({selector: 'app-mat-card-header', template: ''})
-class CardHeaderComponent {
-}
-
-@Component({selector: 'app-mat-card-title', template: ''})
-class CardTitleComponent {
-}
-
-@Component({selector: 'app-mat-card-subtitle', template: ''})
-class CardSubtitleComponent {
-}
-
 @Component({selector: 'app-mat-card-content', template: ''})
 class CardContentComponent {
 }
@@ -31,9 +19,6 @@ describe('EmployeeComponent', () => {
       declarations: [
         EmployeeComponent,
         CardComponent,
-        CardHeaderComponent,
-        CardTitleComponent,
-        CardSubtitleComponent,
         CardContentComponent
       ],
     }).compileComponents();
@@ -44,9 +29,9 @@ describe('EmployeeComponent', () => {
     const comp = fixture.debugElement.componentInstance;
     comp.employee = {
       id: 1,
-      firstName: 'first',
-      lastName: 'last',
-      position: 'jobTitle'
+      firstName: 'Brian',
+      lastName: 'McGee',
+      position: 'CEO'
     };
 
     expect(comp).toBeTruthy();

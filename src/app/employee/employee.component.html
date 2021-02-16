@@ -1,26 +1,51 @@
 <mat-card class="employee">
-  <mat-card-header>
-    <mat-card-title>{{employee.lastName}}, {{employee.firstName}}</mat-card-title>
-    <mat-card-subtitle>{{employee.id}} - Direct Reports: {{employeesThatReport?.length || '0'}}</mat-card-subtitle>
-  </mat-card-header>
+
+  <div class="employee-header">
+    <h1 class="employee-title">{{employee.firstName}} {{employee.lastName}}</h1>
+    <h2 class="employee-subtitle">{{employee.position}}</h2>
+  </div>
+
   <mat-card-content>
-    <dl>
-      <dt>Job Title</dt>
-      <dd>{{employee.position}}</dd>
-    </dl>
+    <ng-container *ngIf="employeesThatReport?.length > 0; else elseBlock">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Direct Reports ({{employeesThatReport?.length || '0'}})</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf="employeesThatReport?.length > 0">
+          <table>
+            <thead>
+              <tr><th colspan="2">Employee</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of employeesThatReport">
+                <td>{{emp.firstName}} {{emp.lastName}}</td>
+                <td>
+                  <button mat-icon-button title="Edit employee's compensation" (click)="onEditClick(emp)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button title="Delete report" (click)="onDeleteClick(emp)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </mat-expansion-panel>
+    </ng-container>
+    <ng-template #elseBlock>
+      <mat-expansion-panel disabled>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Direct Reports (0)</mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+    </ng-template>
   </mat-card-content>
-  <mat-card-footer *ngIf="employeesThatReport?.length > 0">
-    <div *ngFor="let emp of employeesThatReport">
-      <div>{{emp.lastName}}, {{emp.firstName}}</div>
-      <div>
-        <button mat-icon-button title="Edit employee's compensation" (click)="onEditClick(emp)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button title="Delete report" (click)="onDeleteClick(emp)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-    </div>
+
+  <mat-card-footer>
+    <span>Employee ID: {{employee.id}}</span>
   </mat-card-footer>
+
 </mat-card>
+
 <app-employee-dialog></app-employee-dialog>

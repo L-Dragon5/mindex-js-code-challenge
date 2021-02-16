@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 
 import {Employee} from '../employee';
@@ -10,7 +10,7 @@ import {EmployeeDialogComponent} from '../employee-dialog/employee-dialog.compon
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent {
+export class EmployeeComponent implements OnInit {
   @Input() employee: Employee;
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
@@ -32,7 +32,7 @@ export class EmployeeComponent {
   // When edit button is pressed, emit edit to Employee List.
   onEditClick (emp) : void {
     const dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: {
         employee: emp,
         type: 'edit',
@@ -49,7 +49,7 @@ export class EmployeeComponent {
   // When delete button is pressed, emit delete to Employee List.
   onDeleteClick (emp) : void {
     const dialogRef = this.dialog.open(EmployeeDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: {
         employee: emp,
         type: 'delete',
